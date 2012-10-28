@@ -5,11 +5,16 @@ class Mind < ActiveRecord::Base
   has_many :training_data
   has_many :analyses
 
+  #
+  #   use training information
+  #
   def train
     all_inputs = []
     all_expected_outputs = []
+
     training_data.each do |training_datum|
       inputs = []
+      # assume it's numeric, comma-separated
       training_datum.input.split(',').map(&:to_f).each do |input|
         inputs << input
       end
@@ -24,17 +29,20 @@ class Mind < ActiveRecord::Base
       :desired_outputs=>all_expected_outputs
     )
     #
-    #brain.train_on_data(training_set, 1000, 1, 0.1)
+    brain.train_on_data(training_set, 1000, 1, 0.1)
   end
 
-  def classify(input); brain.run(input) end
-
-  def brain
-    # ruby-fann
-    @brain ||= RubyFann::Standard.new(
-      :num_inputs=>self.input_arity,
-      :hidden_neurons=>[2, 8, 4, 3, 4],
-      :num_outputs=>self.output_arity
-    )
+  def analyze(inputs)
+    brain.run(inputs.split(',').map(&:to_f))
   end
+
+  private
+    def brain
+      # ruby-fann
+      @brain ||= RubyFann::Standard.new(
+        :num_inputs=>self.input_arity,
+        :hidden_neurons=>[2, 8, 4, 3, 4],
+        :num_outputs=>self.output_arity
+      )
+    end
 end

@@ -3,7 +3,7 @@ class CreateAnalyses < ActiveRecord::Migration
     create_table :analyses do |t|
       t.text :inputs
       t.text :output
-      t.integer :mind_id
+      t.integer3 :mind_id
 
       t.timestamps
     end
