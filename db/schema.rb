@@ -30,7 +30,14 @@ ActiveRecord::Schema.define(:version => 20121026044301) do
     t.integer  "output_arity"
   end
 
-# Could not dump table "training_data" because of following StandardError
-#   Unknown type 'reference' for column 'mind_id'
+  create_table "training_data", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "mind_id"
+    t.text     "input"
+    t.text     "expected_output"
+  end
 
 end
