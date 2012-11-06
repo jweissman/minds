@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026044301) do
+ActiveRecord::Schema.define(:version => 20121030230642) do
 
   create_table "analyses", :force => true do |t|
     t.text     "inputs"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20121026044301) do
     t.integer  "mind_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "hidden_neuron_layers", :force => true do |t|
+    t.integer  "mind_id"
+    t.integer  "neuron_count"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "minds", :force => true do |t|

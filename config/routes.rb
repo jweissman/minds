@@ -1,4 +1,6 @@
 Minds::Application.routes.draw do
+  resources :hidden_neuron_layers
+
   resources :analyses
 
   get "welcome/hero"

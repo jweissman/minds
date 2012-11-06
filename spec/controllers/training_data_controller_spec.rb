@@ -24,7 +24,7 @@ describe TrainingDataController do
   # TrainingDatum. As you add validations to TrainingDatum, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {input: [0.3,0.4,0.5], expected_output: [0.4]}
   end
 
   # This should return the minimal set of values that should be in the session

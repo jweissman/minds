@@ -24,7 +24,8 @@ class MindsController < ApplicationController
   # GET /minds/new
   # GET /minds/new.json
   def new
-    @mind = Mind.new
+    @mind = Mind.new(:input_arity => 3, :output_arity => 1)
+    @mind.build_hidden_neuron_layers #({:position => 1, :neuron_count => 3})
 
     respond_to do |format|
       format.html # new.html.erb

@@ -14,7 +14,6 @@
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
     %link(href="images/favicon.ico" rel="shortcut icon")
 
-
   %body
     .navbar.navbar-fluid-top
       .navbar-inner
@@ -23,12 +22,14 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") Minds
+          %a.brand(href='/')
+            Minds
           .container.nav-collapse
             %ul.nav
-              %li= link_to "All Minds", "/minds"
+              %li= link_to "Minds", "/minds"
               %li= link_to "Training Data", "/training_data"
-              %li= link_to "Analyses", "/analyses"
+              %li= link_to "Analysis", "/analyses"
+
 
     .container-fluid
       = yield
@@ -40,3 +41,4 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag "application"
+    = yield :page_javascript

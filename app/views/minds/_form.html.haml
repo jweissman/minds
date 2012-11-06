@@ -15,6 +15,44 @@
     = f.label :output_arity, :class => 'control-label'
     .controls
       = f.number_field :output_arity, :class => 'number_field'
+
+  #sortable.control-group
+    -#.span12
+    -#= f.label :hidden_neuron_layers, :class => 'control-label'
+    -#.span12
+    = f.fields_for :hidden_neuron_layers do |builder|
+      .neuron-layer
+        .well
+          = builder.hidden_field :mind_id, :value => @mind.id
+          .control-group
+            = builder.label :neuron_count, :class => 'control-label'
+            .controls
+              = builder.number_field :neuron_count, :class => 'number_field input-small'
+          .control-group
+            = builder.label :position, :class => 'control-label'
+            .controls
+              = builder.number_field :position, :class => 'number_field input-small'
+          -#.form-actions
+          -#  = builder.submit 'Create!', :class => 'btn btn-primary'
+            -#= link_to t('.cancel', :default => t("helpers.links.cancel")), hidden_neuron_layers_path, :class => 'btn'
+
+
+
+
+    -#= form_for(@mind.hidden_neuron_layers) do |innerf|
+    -#  %p something
+    -#= form_for(@mind.hidden_neuron_layers) do |inner_form|
+      .control-group
+        = inner_form.label :neuron_count
+        .controls
+          = innter_form.number_field :output_arity, :class => 'number_field'
+        = inner_form.submit
+
+    -#%ul
+    -#  - @mind.hidden_neuron_layers.each do |layer|
+    -#    %li = layer.count
+
+
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), minds_path, :class => 'btn'
