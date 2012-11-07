@@ -48,7 +48,7 @@ class Mind < ActiveRecord::Base
   #   desired_error - The desired <get_MSE> or <get_bit_fail>, depending on which stop function
   #                   is chosen by <set_train_stop_function>.
   #10000, 1000, 0.0
-  def train(sample_data=training_set,max_epochs=10000,epochs_between_reports=1000,desired_error=0.0)
+  def train(sample_data=training_set,max_epochs=1000,epochs_between_reports=1000,desired_error=0.0001)
     #p sample_data
     if sample_data.is_a? RubyFann::TrainData
 
@@ -85,8 +85,8 @@ class Mind < ActiveRecord::Base
       num_outputs: self.output_arity
     )
 
-    @brain.set_activation_steepness_hidden(1.0)
-    @brain.set_activation_steepness_output(1.0)
+    #@brain.set_activation_steepness_hidden(1.0)
+    #@brain.set_activation_steepness_output(1.0)
 
     #@brain.set_activation_function_hidden(:sigmoid_symmetric)
     #@brain.set_activation_function_output(:sigmoid_symmetric)

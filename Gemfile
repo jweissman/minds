@@ -11,6 +11,9 @@ gem 'haml-rails'
 gem 'rspec-rails'
 gem 'json'
 
+gem "acts_as_list"
+
+
 #
 #     neural networks in ruby
 #
@@ -21,6 +24,9 @@ gem 'thin'
 
 group :development, :test do
   gem 'factory_girl_rails'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'rb-fsevent'
 end
 
 # Gems used only for assets and not required
@@ -31,6 +37,9 @@ group :assets do
   gem 'less-rails'
   gem 'twitter-bootstrap-rails'
   gem 'less-rails-bootstrap'
+
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
