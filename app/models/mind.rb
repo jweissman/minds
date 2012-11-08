@@ -2,8 +2,6 @@ class Mind < ActiveRecord::Base
   attr_accessible :description, :name
   attr_accessible :input_arity, :output_arity
   attr_accessible :hidden_neuron_layers_attributes
-
-  #attr_accessible :hidden_neurons
   has_many :hidden_neuron_layers, :order => "position"
 
   after_create :bootstrap
@@ -14,6 +12,26 @@ class Mind < ActiveRecord::Base
 
   has_many :training_data
   has_many :analyses
+
+  #
+  def self.from_training_set(training_set, hidden_neurons=[3])
+    mind = Mind.create(
+      input_arity:  training_set.first[:input].size,
+      output_arity: training_set.first[:output].size
+    )
+
+    training_set.each do |datum|
+      mind.training_data.build(input: datum[:input], expected_output: datum[:output])
+    end
+
+    hidden_neurons.each_with_index do |neuron_count,position|
+      mind.hidden_neuron_layers.build(position: position, neuron_count: neuron_count)
+    end
+
+    mind.save!
+    mind.train
+    mind
+  end
 
   def analyze!(input)
     puts "--- about to train and analyze..."
@@ -85,14 +103,13 @@ class Mind < ActiveRecord::Base
       num_outputs: self.output_arity
     )
 
-    #@brain.set_activation_steepness_hidden(1.0)
-    #@brain.set_activation_steepness_output(1.0)
+    @brain.set_activation_steepness_hidden(1.0)
+    @brain.set_activation_steepness_output(1.0)
+    @brain.set_activation_function_hidden(:sigmoid_symmetric)
+    @brain.set_activation_function_output(:sigmoid_symmetric)
 
-    #@brain.set_activation_function_hidden(:sigmoid_symmetric)
-    #@brain.set_activation_function_output(:sigmoid_symmetric)
-    #
-    #bit_fail = 0.001
-    #@brain.set_train_stop_function(:bit)
-    #@brain.set_bit_fail_limit(bit_fail)
+    bit_fail = 0.001
+    @brain.set_train_stop_function(:bit)
+    @brain.set_bit_fail_limit(bit_fail)
   end
 end
